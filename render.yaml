@@ -1,6 +1,7 @@
 services:
+  # 1. Backend Web Service
   - type: web
-    name: devi-homeopathy-backend
+    name: healthcare-backend
     runtime: node
     plan: free
     rootDir: backend
@@ -9,3 +10,21 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      - key: TRUST_PROXY
+        value: "1"
+
+  # 2. Frontend Static Site (Optional on Render)
+  - type: static
+    name: healthcare-frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false
