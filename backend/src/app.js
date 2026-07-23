@@ -21,8 +21,18 @@ app.set('trust proxy', env.trustProxy);
 app.use(helmet());
 app.use(cors({
   origin(origin, callback) {
-    if (!origin || env.clientOrigins.includes(origin)) return callback(null, true);
-    const error = new Error('Origin is not allowed by CORS');
+    // Allow non-browser requests (Postman/curl), local development ports, and matching CLIENT_URL origins
+    const isLocalhost = /^http:\/\/(localhost|127\.0\.0\.1):(5173|5174|3000|5000)$/.test(origin);
+    const isVercelApp = origin && origin.endsWith('.vercel.app');
+    const isAllowedOrigin = !origin ||
+      isLocalhost ||
+      env.clientOrigins.includes('*') ||
+      env.clientOrigins.includes(origin) ||
+      (isVercelApp && env.clientOrigins.some((allowed) => allowed.includes('vercel.app')));
+
+    if (isAllowedOrigin) return callback(null, true);
+
+    const error = new Error(`Origin (${origin}) is not allowed by CORS`);
     error.statusCode = 403;
     return callback(error);
   },
