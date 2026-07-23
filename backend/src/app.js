@@ -9,6 +9,12 @@ const routes = require('./routes');
 
 const app = express();
 
+// Health check endpoint for Render
+app.get('/', (req, res) => {
+  res.status(200).send('API is running smoothly!');
+});
+
+
 app.disable('x-powered-by');
 app.set('trust proxy', env.trustProxy);
 
