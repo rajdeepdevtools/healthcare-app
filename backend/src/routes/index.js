@@ -1,0 +1,16 @@
+const router = require('express').Router();
+const { Treatment, Blog, Course, Lesson, Testimonial } = require('../models');
+const resourceRoutes = require('./resource.routes');
+
+router.use('/auth', require('./auth.routes'));
+router.use('/appointments', require('./appointment.routes'));
+router.use('/feedback', require('./feedback.routes'));
+router.use('/certificates', require('./certificate.routes'));
+
+router.use('/treatments', resourceRoutes(Treatment, { sort: { order: 1, createdAt: -1 }, publicFilter: { isActive: true } }));
+router.use('/blogs', resourceRoutes(Blog, { publicFilter: { status: 'published' } }));
+router.use('/courses', resourceRoutes(Course, { publicFilter: { isPublished: true } }));
+router.use('/lessons', resourceRoutes(Lesson, { sort: { order: 1 } }));
+router.use('/testimonials', resourceRoutes(Testimonial, {}));
+
+module.exports = router;

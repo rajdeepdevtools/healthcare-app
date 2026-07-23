@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo-wellness.png?v=clinic-2026" />
+    <link rel="apple-touch-icon" href="/logo-wellness.png?v=clinic-2026" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#193b2e" />
+    <title>Health Care & Wellness Clinic - Natural Healing via Bach Flower Method</title>
+    <script>
+      (function () {
+        if (!('serviceWorker' in navigator) || !navigator.serviceWorker.getRegistrations) return;
+        navigator.serviceWorker.getRegistrations()
+          .then(function (registrations) {
+            if (!registrations.length) return;
+            return Promise.all(registrations.map(function (registration) { return registration.unregister(); }))
+              .then(function () {
+                try {
+                  if (navigator.serviceWorker.controller && sessionStorage.getItem('clinic-sw-refresh') !== 'done') {
+                    sessionStorage.setItem('clinic-sw-refresh', 'done');
+                    window.location.reload();
+                  }
+                } catch {}
+              });
+          })
+          .catch(function () {});
+      }());
+    </script>
+    <script>
+      (function () {
+        function showRuntimeError(message) {
+          var root = document.getElementById('root');
+          if (!root) return;
+          root.innerHTML = '<div style="min-height:100vh;padding:32px;font-family:Arial,sans-serif;background:#fff7ed;color:#111827"><h1 style="margin:0 0 12px;font-size:24px">App loading error</h1><pre style="white-space:pre-wrap;background:#111827;color:#fff;padding:16px;border-radius:8px">' + String(message).replace(/[<>&]/g, function (char) { return ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' })[char]; }) + '</pre></div>';
+        }
+        window.addEventListener('error', function (event) { showRuntimeError(event.message || 'Unknown error'); });
+        window.addEventListener('unhandledrejection', function (event) { showRuntimeError(event.reason && (event.reason.stack || event.reason.message) || event.reason || 'Unknown promise error'); });
+      }());
+    </script>
+    <meta
+      name="description"
+      content="Health Care & Wellness Clinic offers gentle, root-cause healing using the Bach Flower Method for emotional balance, stress, sleep, and chronic conditions."
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Health Care & Wellness Clinic" />
+    <meta property="og:title" content="Health Care & Wellness Clinic - Natural Healing, Holistic Care" />
+    <meta
+      property="og:description"
+      content="Gentle, personalised Bach Flower care centred on you. Book a consultation for emotional and physical wellness."
+    />
+    <meta property="og:image" content="/logo-wellness.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Health Care & Wellness Clinic - Natural Healing, Holistic Care" />
+    <meta
+      name="twitter:description"
+      content="Gentle, personalised Bach Flower care centred on you. Book a consultation today."
+    />
+    <meta name="twitter:image" content="/logo-wellness.png" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx?v=clinic-fix-2026"></script>
+  </body>
+</html>
